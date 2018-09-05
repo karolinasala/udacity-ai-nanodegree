@@ -3,6 +3,7 @@
 ![Example game of isolation](viz.gif)
 
 ## Additional Materials
+
 1. [Heuristics Analysis](heuristic_analysis.pdf)
 2. [Research Review](research_review.pdf)
 
