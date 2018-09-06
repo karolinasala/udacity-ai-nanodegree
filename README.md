@@ -5,3 +5,4 @@
 
 1. [Solve a Sudoku with AI](1_foundations/1_sudoku/)
 2. [Build a Game-Playing Agent](1_foundations/2_isolation/)
+3. [Implement a Planning Search](1_foundations/3_planning/)
