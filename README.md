@@ -3,7 +3,14 @@
 # Foundations of AI - Term 1
 ## Projects and Labs
 
+<<<<<<< HEAD
 * Project 1. [Solve a Sudoku with AI](1_foundations/1_sudoku/)
 * Project 2. [Build a Game-Playing Agent](1_foundations/2_isolation/)
 * Project 3. [Implement a Planning Search](1_foundations/3_planning/)
 * Project 4. [Build a Sign Language Recognizer](1_foundations/4_recognizer/)
+=======
+Project 1. [Solve a Sudoku with AI](1_foundations/1_sudoku/)
+Project 2. [Build a Game-Playing Agent](1_foundations/2_isolation/)
+Project 3. [Implement a Planning Search](1_foundations/3_planning/)
+Project 4. [Build a Sign Language Recognizer](1_foundations/4_recognizer/)
+>>>>>>> bcbd330008bf24bd8cdf346be6339c1961357130
