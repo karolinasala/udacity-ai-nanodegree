@@ -8,7 +8,6 @@
 * Project 3. [Implement a Planning Search](1_foundations/3_planning/)
 * Project 4. [Build a Sign Language Recognizer](1_foundations/4_recognizer/)
 
-
 # Deep Learning and Applications - Term 2
 ## Projects and Labs
 
