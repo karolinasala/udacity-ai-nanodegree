@@ -1,0 +1,1615 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{RNN\_project}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Artificial Intelligence
+Nanodegree}\label{artificial-intelligence-nanodegree}
+
+\subsection{Recurrent Neural Network
+Projects}\label{recurrent-neural-network-projects}
+
+Welcome to the Recurrent Neural Network Project in the Artificial
+Intelligence Nanodegree! In this notebook, some template code has
+already been provided for you, and you will need to implement additional
+functionality to successfully complete this project. You will not need
+to modify the included code beyond what is requested. Sections that
+begin with \textbf{'Implementation'} in the header indicate that the
+following block of code will require additional functionality which you
+must provide. Instructions will be provided for each section and the
+specifics of the implementation are marked in the code block with a
+'TODO' statement. Please be sure to read the instructions carefully!
+
+In addition to implementing code, there will be questions that you must
+answer which relate to the project and your implementation. Each section
+where you will answer a question is preceded by a \textbf{'Question X'}
+header. Carefully read each question and provide thorough answers in the
+following text boxes that begin with \textbf{'Answer:'}. Your project
+submission will be evaluated based on your answers to each of the
+questions and the implementation you provide.
+
+\begin{quote}
+\textbf{Note:} Code and Markdown cells can be executed using the
+\textbf{Shift + Enter} keyboard shortcut. In addition, Markdown cells
+can be edited by typically double-clicking the cell to enter edit mode.
+\end{quote}
+
+    \subsubsection{Implementation TODOs in this
+notebook}\label{implementation-todos-in-this-notebook}
+
+This notebook contains two problems, cut into a variety of TODOs. Make
+sure to complete each section containing a TODO marker throughout the
+notebook. For convenience we provide links to each of these sections
+below.
+
+Section \ref{todo_1}
+
+Section \ref{todo_2}
+
+Section \ref{todo_3}
+
+Section \ref{todo_4}
+
+Section \ref{todo_5}
+
+Section \ref{todo_6}
+
+    \section{Problem 1: Perform time series
+prediction}\label{problem-1-perform-time-series-prediction}
+
+In this project you will perform time series prediction using a
+Recurrent Neural Network regressor. In particular you will re-create the
+figure shown in the notes - where the stock price of Apple was
+forecasted (or predicted) 7 days in advance. In completing this exercise
+you will learn how to construct RNNs using Keras, which will also aid in
+completing the second project in this notebook.
+
+The particular network architecture we will employ for our RNN is known
+as \href{https://en.wikipedia.org/wiki/Long_short-term_memory}{Long Term
+Short Memory (LSTM)}, which helps significantly avoid technical problems
+with optimization of RNNs.
+
+    \subsection{1.1 Getting started}\label{getting-started}
+
+First we must load in our time series - a history of around 140 days of
+Apple's stock price. Then we need to perform a number of pre-processing
+steps to prepare it for use with an RNN model. First off, it is good
+practice to normalize time series - by normalizing its range. This helps
+us avoid serious numerical issues associated how common activation
+functions (like tanh) transform very large (positive or negative)
+numbers, as well as helping us to avoid related issues when computing
+derivatives.
+
+Here we normalize the series to lie in the range {[}0,1{]} {[}using this
+scikit
+function{]}(http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html),
+but it is also commonplace to normalize by a series standard deviation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Load in necessary libraries for data input and normalization}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+        
+        \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{o}{*}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+        
+        \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{o}{*}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} load in and normalize the dataset}
+        \PY{n}{dataset} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/normalized\PYZus{}apple\PYZus{}prices.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The autoreload extension is already loaded. To reload it, use:
+  \%reload\_ext autoreload
+
+    \end{Verbatim}
+
+    Lets take a quick look at the (normalized) time series we'll be
+performing predictions on.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} lets take a look at our time series}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time period}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized series value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} Text(0,0.5,'normalized series value')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{1.2 Cutting our time series into
+sequences}\label{cutting-our-time-series-into-sequences}
+
+Remember, our time series is a sequence of numbers that we can represent
+in general mathematically as
+
+\[s_{0},s_{1},s_{2},...,s_{P}\]
+
+where \(s_{p}\) is the numerical value of the time series at time period
+\(p\) and where \(P\) is the total length of the series. In order to
+apply our RNN we treat the time series prediction problem as a
+regression problem, and so need to use a sliding window to construct a
+set of associated input/output pairs to regress on. This process is
+animated in the gif below.
+
+For example - using a window of size T = 5 (as illustrated in the gif
+above) we produce a set of input/output pairs like the one shown in the
+table below
+
+\[\begin{array}{c|c}
+\text{Input} & \text{Output}\\
+\hline \color{CornflowerBlue} {\langle s_{1},s_{2},s_{3},s_{4},s_{5}\rangle} & \color{Goldenrod}{ s_{6}} \\
+\ \color{CornflowerBlue} {\langle s_{2},s_{3},s_{4},s_{5},s_{6} \rangle } & \color{Goldenrod} {s_{7} } \\
+\color{CornflowerBlue}  {\vdots} & \color{Goldenrod} {\vdots}\\
+\color{CornflowerBlue} { \langle s_{P-5},s_{P-4},s_{P-3},s_{P-2},s_{P-1} \rangle } & \color{Goldenrod} {s_{P}}
+\end{array}\]
+
+Notice here that each input is a sequence (or vector) of length 5 (and
+in general has length equal to the window size T) while each
+corresponding output is a scalar value. Notice also how given a time
+series of length P and window size T = 5 as shown above, we created P -
+5 input/output pairs. More generally, for a window size T we create P -
+T such pairs.
+
+    Now its time for you to window the input time series as described above!
+
+\textbf{TODO:} Implement the function called
+\textbf{window\_transform\_series} in my\_answers.py so that it runs a
+sliding window along the input series and creates associated
+input/output pairs. Note that this function should input a) the series
+and b) the window length, and return the input/output subsequences. Make
+sure to format returned input/output as generally shown in table above
+(where window\_size = 5), and make sure your returned input is a numpy
+array.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    You can test your function on the list of odd numbers given below
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{odd\PYZus{}nums} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Here is a hard-coded solution for odd\_nums. You can compare its results
+with what you get from your \textbf{window\_transform\_series}
+implementation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} run a window of size 2 over the odd number sequence and display the results}
+        \PY{n}{window\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{2}
+        
+        \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{y} \PY{o}{=} \PY{n}{odd\PYZus{}nums}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
+        
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}optional}
+        
+        \PY{k}{assert}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ndarray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{assert}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ndarray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{assert}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{k}{assert}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape} \PY{o+ow}{in} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} print out input/output pairs \PYZhy{}\PYZhy{}\PYZgt{} here input = X, corresponding output = y}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} the input X will look like \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{X}\PY{p}{)}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} the associated output y will look like \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--- the input X will look like ----
+[[ 1  3]
+ [ 3  5]
+ [ 5  7]
+ [ 7  9]
+ [ 9 11]]
+--- the associated output y will look like ----
+[[ 5]
+ [ 7]
+ [ 9]
+ [11]
+ [13]]
+
+    \end{Verbatim}
+
+    Again - you can check that your completed
+\textbf{window\_transform\_series} function works correctly by trying it
+on the odd\_nums sequence - you should get the above output.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO: implement the function window\PYZus{}transform\PYZus{}series in the file my\PYZus{}answers.py}
+        \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{n}{window\PYZus{}transform\PYZus{}series}
+\end{Verbatim}
+
+
+    With this function in place apply it to the series in the Python cell
+below. We use a window\_size = 7 for these experiments.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} window the data using your windowing function}
+        \PY{n}{window\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{7}
+        \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{window\PYZus{}transform\PYZus{}series}\PY{p}{(}\PY{n}{series} \PY{o}{=} \PY{n}{dataset}\PY{p}{,}\PY{n}{window\PYZus{}size} \PY{o}{=} \PY{n}{window\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{1.3 Splitting into training and testing
+sets}\label{splitting-into-training-and-testing-sets}
+
+In order to perform proper testing on our dataset we will lop off the
+last 1/3 of it for validation (or testing). This is that once we train
+our model we have something to test it on (like any regression
+problem!). This splitting into training/testing sets is done in the cell
+below.
+
+Note how here we are \textbf{not} splitting the dataset \emph{randomly}
+as one typically would do when validating a regression model. This is
+because our input/output pairs \emph{are related temporally}. We don't
+want to validate our model by training on a random subset of the series
+and then testing on another random subset, as this simulates the
+scenario that we receive new points \emph{within the timeframe of our
+training set}.
+
+We want to train on one solid chunk of the series (in our case, the
+first full 2/3 of it), and validate on a later chunk (the last 1/3) as
+this simulates how we would predict \emph{future} values of a time
+series.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} split our dataset into training / testing sets}
+        \PY{n}{train\PYZus{}test\PYZus{}split} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}   \PY{c+c1}{\PYZsh{} set the split point}
+        
+        \PY{c+c1}{\PYZsh{} partition the training set}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} keep the last chunk for testing}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{:}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} NOTE: to use keras\PYZsq{}s RNN LSTM module our input must be reshaped to [samples, window size, stepsize] }
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{window\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{window\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{1.4 Build and run an RNN regression
+model}\label{build-and-run-an-rnn-regression-model}
+
+Having created input/output pairs out of our time series and cut this
+into training/testing sets, we can now begin setting up our RNN. We use
+Keras to quickly build a two hidden layer RNN of the following
+specifications
+
+\begin{itemize}
+\tightlist
+\item
+  layer 1 uses an LSTM module with 5 hidden units (note here the
+  input\_shape = (window\_size,1))
+\item
+  layer 2 uses a fully connected module with one unit
+\item
+  the 'mean\_squared\_error' loss should be used (remember: we are
+  performing regression here)
+\end{itemize}
+
+This can be constructed using just a few lines - see e.g., the
+\href{https://keras.io/getting-started/sequential-model-guide/}{general
+Keras documentation} and the
+\href{https://keras.io/layers/recurrent/}{LSTM documentation in
+particular} for examples of how to quickly use Keras to build neural
+network models. Make sure you are initializing your optimizer given the
+\href{https://keras.io/optimizers/}{keras-recommended approach for RNNs}
+
+(given in the cell below). (remember to copy your completed function
+into the script \emph{my\_answers.py} function titled
+\emph{build\_part1\_RNN} before submitting your project)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO: create required RNN model}
+        \PY{c+c1}{\PYZsh{} import keras network libraries}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{LSTM}
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        
+        \PY{c+c1}{\PYZsh{} given \PYZhy{} fix random seed \PYZhy{} so we can all reproduce the same results on our default time series}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} TODO: implement build\PYZus{}part1\PYZus{}RNN in my\PYZus{}answers.py}
+        \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{n}{build\PYZus{}part1\PYZus{}RNN}
+        \PY{n}{model} \PY{o}{=} \PY{n}{build\PYZus{}part1\PYZus{}RNN}\PY{p}{(}\PY{n}{window\PYZus{}size}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} build model using keras documentation recommended optimizer initialization}
+        \PY{n}{optimizer} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{RMSprop}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{rho}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}08}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} compile the model}
+        \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{)}
+\end{Verbatim}
+
+
+    With your model built you can now fit the model by activating the cell
+below! Note: the number of epochs (np\_epochs) and batch\_size are
+preset (so we can all produce the same results). You can choose to
+toggle the verbose parameter - which gives you regular updates on the
+progress of the algorithm - on and off by setting it to 1 or 0
+respectively.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} run your model!}
+        \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <keras.callbacks.History at 0x17dfa816d30>
+\end{Verbatim}
+            
+    \subsection{1.5 Checking model
+performance}\label{checking-model-performance}
+
+With your model fit we can now make predictions on both our training and
+testing sets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} generate predictions for training}
+         \PY{n}{train\PYZus{}predict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{test\PYZus{}predict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    In the next cell we compute training and testing errors using our
+trained model - you should be able to achieve at least
+
+\emph{training\_error} \textless{} 0.02
+
+and
+
+\emph{testing\_error} \textless{} 0.02
+
+with your fully trained model.
+
+If either or both of your accuracies are larger than 0.02 re-train your
+model - increasing the number of epochs you take (a maximum of around
+1,000 should do the job) and/or adjusting your batch\_size.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} print out training and testing errors}
+         \PY{n}{training\PYZus{}error} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{training\PYZus{}error}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{testing\PYZus{}error} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testing error = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{testing\PYZus{}error}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+training error = 0.0160044325008
+testing error = 0.0139837318945
+
+    \end{Verbatim}
+
+    Activating the next cell plots the original data, as well as both
+predictions on the training and testing sets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Plot everything \PYZhy{} the original series as well as predictions on training and testing sets}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{} plot original series}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dataset}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plot training set prediction}
+         \PY{n}{split\PYZus{}pt} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split} \PY{o}{+} \PY{n}{window\PYZus{}size} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{window\PYZus{}size}\PY{p}{,}\PY{n}{split\PYZus{}pt}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{train\PYZus{}predict}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plot testing set prediction}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{split\PYZus{}pt}\PY{p}{,}\PY{n}{split\PYZus{}pt} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}predict}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}predict}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} pretty up graph}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(normalized) price of Apple stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{original series}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testing fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Note:} you can try out any time series for this exercise! If you
+would like to try another see e.g.,
+\href{https://datamarket.com/data/list/?q=provider\%3Atsdl}{this site
+containing thousands of time series} and pick another one!
+
+    \section{Problem 2: Create a sequence
+generator}\label{problem-2-create-a-sequence-generator}
+
+    \subsection{2.1 Getting started}\label{getting-started}
+
+In this project you will implement a popular Recurrent Neural Network
+(RNN) architecture to create an English language sequence generator
+capable of building semi-coherent English sentences from scratch by
+building them up character-by-character. This will require a substantial
+amount amount of parameter tuning on a large training corpus (at least
+100,000 characters long). In particular for this project we will be
+using a complete version of Sir Arthur Conan Doyle's classic book The
+Adventures of Sherlock Holmes.
+
+How can we train a machine learning model to generate text
+automatically, character-by-character? \emph{By showing the model many
+training examples so it can learn a pattern between input and output.}
+With this type of text generation each input is a string of valid
+characters like this one
+
+\emph{dogs are grea}
+
+while the corresponding output is the next character in the sentence -
+which here is 't' (since the complete sentence is 'dogs are great'). We
+need to show a model many such examples in order for it to make
+reasonable predictions.
+
+\textbf{Fun note:} For those interested in how text generation is being
+used check out some of the following fun resources:
+
+\begin{itemize}
+\item
+  \href{http://www.cs.toronto.edu/~ilya/rnn.html}{Generate wacky
+  sentences} with this academic RNN text generator
+\item
+  Various twitter bots that tweet automatically generated text
+  like\href{http://tweet-generator-alex.herokuapp.com/}{this one}.
+\item
+  the \href{https://github.com/NaNoGenMo/2016}{NanoGenMo} annual contest
+  to automatically produce a 50,000+ novel automatically
+\item
+  \href{https://github.com/genekogan/RobotShakespeare}{Robot
+  Shakespeare} a text generator that automatically produces
+  Shakespear-esk sentences
+\end{itemize}
+
+    \subsection{2.2 Preprocessing a text
+dataset}\label{preprocessing-a-text-dataset}
+
+Our first task is to get a large text corpus for use in training, and on
+it we perform a several light pre-processing tasks. The default corpus
+we will use is the classic book Sherlock Holmes, but you can use a
+variety of others as well - so long as they are fairly large (around
+100,000 characters or more).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} read in the text, transforming everything to lower case}
+         \PY{n}{text} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/holmes.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{our original text has }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ characters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+our original text has 581881 characters
+
+    \end{Verbatim}
+
+    Next, lets examine a bit of the raw text. Because we are interested in
+creating sentences of English words automatically by building up each
+word character-by-character, we only want to train on valid English
+words. In other words - we need to remove all of the other characters
+that are not part of English words.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} print out the first 1000 characters of the raw text to get a sense of what we need to throw out}
+         \PY{n}{text}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2000}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} "ď»żproject gutenberg's the adventures of sherlock holmes, by arthur conan doyle\textbackslash{}n\textbackslash{}nthis ebook is for the use of anyone anywhere at no cost and with\textbackslash{}nalmost no restrictions whatsoever.  you may copy it, give it away or\textbackslash{}nre-use it under the terms of the project gutenberg license included\textbackslash{}nwith this ebook or online at www.gutenberg.net\textbackslash{}n\textbackslash{}n\textbackslash{}ntitle: the adventures of sherlock holmes\textbackslash{}n\textbackslash{}nauthor: arthur conan doyle\textbackslash{}n\textbackslash{}nposting date: april 18, 2011 [ebook \#1661]\textbackslash{}nfirst posted: november 29, 2002\textbackslash{}n\textbackslash{}nlanguage: english\textbackslash{}n\textbackslash{}n\textbackslash{}n*** start of this project gutenberg ebook the adventures of sherlock holmes ***\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}nproduced by an anonymous project gutenberg volunteer and jose menendez\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}nthe adventures of sherlock holmes\textbackslash{}n\textbackslash{}nby\textbackslash{}n\textbackslash{}nsir arthur conan doyle\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n   i. a scandal in bohemia\textbackslash{}n  ii. the red-headed league\textbackslash{}n iii. a case of identity\textbackslash{}n  iv. the boscombe valley mystery\textbackslash{}n   v. the five orange pips\textbackslash{}n  vi. the man with the twisted lip\textbackslash{}n vii. the adventure of the blue carbuncle\textbackslash{}nviii. the adventure of the speckled band\textbackslash{}n  ix. the adventure of the engineer's thumb\textbackslash{}n   x. the adventure of the noble bachelor\textbackslash{}n  xi. the adventure of the beryl coronet\textbackslash{}n xii. the adventure of the copper beeches\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}n\textbackslash{}nadventure i. a scandal in bohemia\textbackslash{}n\textbackslash{}ni.\textbackslash{}n\textbackslash{}nto sherlock holmes she is always the woman. i have seldom heard\textbackslash{}nhim mention her under any other name. in his eyes she eclipses\textbackslash{}nand predominates the whole of her sex. it was not that he felt\textbackslash{}nany emotion akin to love for irene adler. all emotions, and that\textbackslash{}none particularly, were abhorrent to his cold, precise but\textbackslash{}nadmirably balanced mind. he was, i take it, the most perfect\textbackslash{}nreasoning and observing machine that the world has seen, but as a\textbackslash{}nlover he would have placed himself in a false position. he never\textbackslash{}nspoke of the softer passions, save with a gibe and a sneer. they\textbackslash{}nwere admirable things for the observer--excellent for drawing the\textbackslash{}nveil from men's motives and actions. but for the trained reasoner\textbackslash{}nto admit such intrusions into his own delicate and finely\textbackslash{}nadjusted temperament was to introduce a di"
+\end{Verbatim}
+            
+    Wow - there's a lot of junk here (i.e., weird uncommon character
+combinations - as this first character chunk contains the title and
+author page, as well as table of contents)! To keep things simple, we
+want to train our RNN on a large chunk of more typical English sentences
+- we don't want it to start thinking non-english words or strange
+characters are valid! - so lets clean up the data a bit.
+
+First, since the dataset is so large and the first few hundred
+characters contain a lot of junk, lets cut it out. Lets also
+find-and-replace those newline tags with empty spaces.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} find and replace \PYZsq{}\PYZbs{}n\PYZsq{} and \PYZsq{}\PYZbs{}r\PYZsq{} symbols \PYZhy{} replacing them }
+         \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{l+m+mi}{1302}\PY{p}{:}\PY{p}{]}
+         \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    \PY{c+c1}{\PYZsh{} replacing \PYZsq{}\PYZbs{}n\PYZsq{} with \PYZsq{}\PYZsq{} simply removes the sequence}
+         \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Lets see how the first 1000 characters of our text looks now!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} print out the first 1000 characters of the raw text to get a sense of what we need to throw out}
+         \PY{n}{text}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} " his eyes she eclipses and predominates the whole of her sex. it was not that he felt any emotion akin to love for irene adler. all emotions, and that one particularly, were abhorrent to his cold, precise but admirably balanced mind. he was, i take it, the most perfect reasoning and observing machine that the world has seen, but as a lover he would have placed himself in a false position. he never spoke of the softer passions, save with a gibe and a sneer. they were admirable things for the observer--excellent for drawing the veil from men's motives and actions. but for the trained reasoner to admit such intrusions into his own delicate and finely adjusted temperament was to introduce a distracting factor which might throw a doubt upon all his mental results. grit in a sensitive instrument, or a crack in one of his own high-power lenses, would not be more disturbing than a strong emotion in a nature such as his. and yet there was but one woman to him, and that woman was the late irene "
+\end{Verbatim}
+            
+    \paragraph{TODO: finish cleaning the
+text}\label{todo-finish-cleaning-the-text}
+
+Lets make sure we haven't left any other atypical characters (commas,
+periods, etc., are ok) lurking around in the depths of the text. You can
+do this by enumerating all the text's unique characters, examining them,
+and then replacing any unwanted characters with empty spaces! Once we
+find all of the text's unique characters, we can remove all of the
+atypical ones in the next cell. Note: don't remove the punctuation marks
+given in my\_answers.py.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO: implement cleaned\PYZus{}text in my\PYZus{}answers.py}
+         \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{n}{cleaned\PYZus{}text}
+         
+         \PY{n}{text} \PY{o}{=} \PY{n}{cleaned\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} shorten any extra dead space created above}
+         \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    With your chosen characters removed print out the first few hundred
+lines again just to double check that everything looks good.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} print out the first 2000 characters of the raw text to get a sense of what we need to throw out}
+         \PY{n}{text}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2000}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} ' his eyes she eclipses and predominates the whole of her sex. it was not that he felt any emotion akin to love for irene adler. all emotions, and that one particularly, were abhorrent to his cold, precise but admirably balanced mind. he was, i take it, the most perfect reasoning and observing machine that the world has seen, but as a lover he would have placed himself in a false position. he never spoke of the softer passions, save with a gibe and a sneer. they were admirable things for the observer excellent for drawing the veil from men s motives and actions. but for the trained reasoner to admit such intrusions into his own delicate and finely adjusted temperament was to introduce a distracting factor which might throw a doubt upon all his mental results. grit in a sensitive instrument, or a crack in one of his own high power lenses, would not be more disturbing than a strong emotion in a nature such as his. and yet there was but one woman to him, and that woman was the late irene adler, of dubious and questionable memory. i had seen little of holmes lately. my marriage had drifted us away from each other. my own complete happiness, and the home centred interests which rise up around the man who first finds himself master of his own establishment, were sufficient to absorb all my attention, while holmes, who loathed every form of society with his whole bohemian soul, remained in our lodgings in baker street, buried among his old books, and alternating from week to week between cocaine and ambition, the drowsiness of the drug, and the fierce energy of his own keen nature. he was still, as ever, deeply attracted by the study of crime, and occupied his immense faculties and extraordinary powers of observation in following out those clues, and clearing up those mysteries which had been abandoned as hopeless by the official police. from time to time i heard some vague account of his doings: of his summons to odessa in the case of the trepoff murder, of his clearing up'
+\end{Verbatim}
+            
+    Now that we have thrown out a good number of non-English
+characters/character sequences lets print out some statistics about the
+dataset - including number of total characters and number of unique
+characters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} count the number of unique characters in the text}
+         \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} print some of the text, as well as statistics}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this corpus has }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ total number of characters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this corpus has }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ unique characters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+this corpus has 573688 total number of characters
+this corpus has 33 unique characters
+
+    \end{Verbatim}
+
+    \subsection{2.3 Cutting data into input/output
+pairs}\label{cutting-data-into-inputoutput-pairs}
+
+Now that we have our text all cleaned up, how can we use it to train a
+model to generate sentences automatically? First we need to train a
+machine learning model - and in order to do that we need a set of
+input/output pairs for a model to train on. How can we create a set of
+input/output pairs from our text to train on?
+
+Remember in part 1 of this notebook how we used a sliding window to
+extract input/output pairs from a time series? We do the same thing
+here! We slide a window of length \(T\) along our giant text corpus -
+everything in the window becomes one input while the character following
+becomes its corresponding output. This process of extracting
+input/output pairs is illustrated in the gif below on a small example
+text using a window size of T = 5.
+
+Notice one aspect of the sliding window in this gif that does not mirror
+the analogous gif for time series shown in part 1 of the notebook - we
+do not need to slide the window along one character at a time but can
+move by a fixed step size \(M\) greater than 1 (in the gif indeed
+\(M = 1\)). This is done with large input texts (like ours which has
+over 500,000 characters!) when sliding the window along one character at
+a time we would create far too many input/output pairs to be able to
+reasonably compute with.
+
+More formally lets denote our text corpus - which is one long string of
+characters - as follows
+
+\[s_{0},s_{1},s_{2},...,s_{P}\]
+
+where \(P\) is the length of the text (again for our text
+\(P \approx 500,000!\)). Sliding a window of size T = 5 with a step
+length of M = 1 (these are the parameters shown in the gif above) over
+this sequence produces the following list of input/output pairs
+
+\[\begin{array}{c|c}
+\text{Input} & \text{Output}\\
+\hline \color{CornflowerBlue} {\langle s_{1},s_{2},s_{3},s_{4},s_{5}\rangle} & \color{Goldenrod}{ s_{6}} \\
+\ \color{CornflowerBlue} {\langle s_{2},s_{3},s_{4},s_{5},s_{6} \rangle } & \color{Goldenrod} {s_{7} } \\
+\color{CornflowerBlue}  {\vdots} & \color{Goldenrod} {\vdots}\\
+\color{CornflowerBlue} { \langle s_{P-5},s_{P-4},s_{P-3},s_{P-2},s_{P-1} \rangle } & \color{Goldenrod} {s_{P}}
+\end{array}\]
+
+Notice here that each input is a sequence (or vector) of 5 characters
+(and in general has length equal to the window size T) while each
+corresponding output is a single character. We created around P total
+number of input/output pairs (for general step size M we create around
+ceil(P/M) pairs).
+
+    Now its time for you to window the input time series as described above!
+
+\textbf{TODO:} Create a function that runs a sliding window along the
+input text and creates associated input/output pairs. A skeleton
+function has been provided for you. Note that this function should input
+a) the text b) the window size and c) the step size, and return the
+input/output sequences. Note: the return items should be \emph{lists} -
+not numpy arrays.
+
+(remember to copy your completed function into the script
+\emph{my\_answers.py} function titled \emph{window\_transform\_text}
+before submitting your project)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO: implement window\PYZus{}transform\PYZus{}series in my\PYZus{}answers.py}
+         \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{n}{window\PYZus{}transform\PYZus{}series}
+\end{Verbatim}
+
+
+    With our function complete we can now use it to produce input/output
+pairs! We employ the function in the next cell, where the window\_size =
+50 and step\_size = 5.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} run your text window\PYZhy{}ing function }
+         \PY{n}{window\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{step\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{inputs}\PY{p}{,} \PY{n}{outputs} \PY{o}{=} \PY{n}{window\PYZus{}transform\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{,}\PY{n}{window\PYZus{}size}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    Lets print out a few input/output pairs to verify that we have made the
+right sort of stuff!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} print out a few of the input/output pairs to verify that we\PYZsq{}ve made the right kind of stuff to learn from}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{inputs}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{outputs}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{inputs}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{outputs}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+input = is eyes she eclipses and predominates the whole of her sex. it was not that he felt any emotion akin
+output =  
+--------------
+input = in to love for irene adler. all emotions, and that one particularly, were abhorrent to his cold, pre
+output = c
+
+    \end{Verbatim}
+
+    Looks good!
+
+    \subsection{2.4 Wait, what kind of problem is text generation
+again?}\label{wait-what-kind-of-problem-is-text-generation-again}
+
+In part 1 of this notebook we used the same pre-processing technique -
+the sliding window - to produce a set of training input/output pairs to
+tackle the problem of time series prediction \emph{by treating the
+problem as one of regression}. So what sort of problem do we have here
+now, with text generation? Well, the time series prediction was a
+regression problem because the output (one value of the time series) was
+a continuous value. Here - for character-by-character text generation -
+each output is a \emph{single character}. This isn't a continuous value
+- but a distinct class - therefore \textbf{character-by-character text
+generation is a classification problem}.
+
+How many classes are there in the data? Well, the number of classes is
+equal to the number of unique characters we have to predict! How many of
+those were there in our dataset again? Lets print out the value again.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} print out the number of unique characters in the dataset}
+         \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this corpus has }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ unique characters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{and these characters are }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{chars}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+this corpus has 33 unique characters
+and these characters are 
+[' ', '!', ',', '.', ':', ';', '?', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+    \end{Verbatim}
+
+    Rockin' - so we have a multiclass classification problem on our hands!
+
+    \subsection{2.5 One-hot encoding
+characters}\label{one-hot-encoding-characters}
+
+The last issue we have to deal with is representing our text data as
+numerical data so that we can use it as an input to a neural network.
+One of the conceptually simplest ways of doing this is via a 'one-hot
+encoding' scheme. Here's how it works.
+
+We transform each character in our inputs/outputs into a vector with
+length equal to the number of unique characters in our text. This vector
+is all zeros except one location where we place a 1 - and this location
+is unique to each character type. e.g., we transform 'a', 'b', and 'c'
+as follows
+
+\[a\longleftarrow\left[\begin{array}{c}
+1\\
+0\\
+0\\
+\vdots\\
+0\\
+0
+\end{array}\right]\,\,\,\,\,\,\,b\longleftarrow\left[\begin{array}{c}
+0\\
+1\\
+0\\
+\vdots\\
+0\\
+0
+\end{array}\right]\,\,\,\,\,c\longleftarrow\left[\begin{array}{c}
+0\\
+0\\
+1\\
+\vdots\\
+0\\
+0 
+\end{array}\right]\cdots\]
+
+where each vector has 32 entries (or in general: number of entries =
+number of unique characters in text).
+
+    The first practical step towards doing this one-hot encoding is to form
+a dictionary mapping each unique character to a unique integer, and one
+dictionary to do the reverse mapping. We can then use these dictionaries
+to quickly make our one-hot encodings, as well as re-translate (from
+integers to characters) the results of our trained RNN classification
+model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} this dictionary is a function mapping each unique character to a unique integer}
+         \PY{n}{chars\PYZus{}to\PYZus{}indices} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} map each unique character to unique integer}
+         
+         \PY{c+c1}{\PYZsh{} this dictionary is a function mapping each unique integer back to a unique character}
+         \PY{n}{indices\PYZus{}to\PYZus{}chars} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} map each unique integer back to unique character}
+\end{Verbatim}
+
+
+    Now we can transform our input/output pairs - consisting of characters -
+to equivalent input/output pairs made up of one-hot encoded vectors. In
+the next cell we provide a function for doing just this: it takes in the
+raw character input/outputs and returns their numerical versions. In
+particular the numerical input is given as \(\bf{X}\), and numerical
+output is given as the \(\bf{y}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} transform character\PYZhy{}based input/output into equivalent numerical versions}
+         \PY{k}{def} \PY{n+nf}{encode\PYZus{}io\PYZus{}pairs}\PY{p}{(}\PY{n}{text}\PY{p}{,}\PY{n}{window\PYZus{}size}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} number of unique chars}
+             \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{num\PYZus{}chars} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} cut up text into character input/output pairs}
+             \PY{n}{inputs}\PY{p}{,} \PY{n}{outputs} \PY{o}{=} \PY{n}{window\PYZus{}transform\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{,}\PY{n}{window\PYZus{}size}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} create empty vessels for one\PYZhy{}hot encoded input/output}
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}\PY{p}{,} \PY{n}{window\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}chars}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}chars}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} loop over inputs/outputs and transform and store in X/y}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sentence} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{chars\PYZus{}to\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{chars\PYZus{}to\PYZus{}indices}\PY{p}{[}\PY{n}{outputs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 
+             \PY{k}{return} \PY{n}{X}\PY{p}{,}\PY{n}{y}
+\end{Verbatim}
+
+
+    Now run the one-hot encoding function by activating the cell below and
+transform our input/output pairs!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} use your function}
+         \PY{n}{window\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{step\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{encode\PYZus{}io\PYZus{}pairs}\PY{p}{(}\PY{n}{text}\PY{p}{,}\PY{n}{window\PYZus{}size}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{2.6 Setting up our RNN}\label{setting-up-our-rnn}
+
+With our dataset loaded and the input/output pairs extracted /
+transformed we can now begin setting up our RNN for training. Again we
+will use Keras to quickly build a single hidden layer RNN - where our
+hidden layer consists of LSTM modules.
+
+Time to get to work: build a 3 layer RNN model of the following
+specification
+
+\begin{itemize}
+\tightlist
+\item
+  layer 1 should be an LSTM module with 200 hidden units
+  -\/-\textgreater{} note this should have input\_shape =
+  (window\_size,len(chars)) where len(chars) = number of unique
+  characters in your cleaned text
+\item
+  layer 2 should be a linear module, fully connected, with len(chars)
+  hidden units -\/-\textgreater{} where len(chars) = number of unique
+  characters in your cleaned text
+\item
+  layer 3 should be a softmax activation ( since we are solving a
+  \emph{multiclass classification})
+\item
+  Use the \textbf{categorical\_crossentropy} loss
+\end{itemize}
+
+This network can be constructed using just a few lines - as with the RNN
+network you made in part 1 of this notebook. See e.g., the
+\href{https://keras.io/getting-started/sequential-model-guide/}{general
+Keras documentation} and the
+\href{https://keras.io/layers/recurrent/}{LSTM documentation in
+particular} for examples of how to quickly use Keras to build neural
+network models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} necessary functions from the keras library}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}\PY{p}{,} \PY{n}{LSTM}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{RMSprop}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data\PYZus{}utils} \PY{k}{import} \PY{n}{get\PYZus{}file}
+         \PY{k+kn}{import} \PY{n+nn}{keras}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         
+         \PY{c+c1}{\PYZsh{} TODO implement build\PYZus{}part2\PYZus{}RNN in my\PYZus{}answers.py}
+         \PY{k+kn}{from} \PY{n+nn}{my\PYZus{}answers} \PY{k}{import} \PY{n}{build\PYZus{}part2\PYZus{}RNN}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{build\PYZus{}part2\PYZus{}RNN}\PY{p}{(}\PY{n}{window\PYZus{}size}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} initialize optimizer}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{RMSprop}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{rho}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}08}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} compile model \PYZhy{}\PYZhy{}\PYZgt{} make sure initialized optimizer and callbacks \PYZhy{} as defined above \PYZhy{} are used}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{2.7 Training our RNN model for text
+generation}\label{training-our-rnn-model-for-text-generation}
+
+With our RNN setup we can now train it! Lets begin by trying it out on a
+small subset of the larger version. In the next cell we take the first
+10,000 input/output pairs from our training database to learn on.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} a small subset of our input/output pairs}
+         \PY{n}{Xsmall} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10000}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{ysmall} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10000}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    Now lets fit our model!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} train the model}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xsmall}\PY{p}{,} \PY{n}{ysmall}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,}\PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} save weights}
+         \PY{n}{model}\PY{o}{.}\PY{n}{save\PYZus{}weights}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}weights/best\PYZus{}RNN\PYZus{}small\PYZus{}textdata\PYZus{}weights.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/40
+10000/10000 [==============================] - 37s 4ms/step - loss: 3.0307
+Epoch 2/40
+10000/10000 [==============================] - 36s 4ms/step - loss: 2.8901
+Epoch 3/40
+10000/10000 [==============================] - 33s 3ms/step - loss: 2.8646
+Epoch 4/40
+10000/10000 [==============================] - 34s 3ms/step - loss: 2.8356
+Epoch 5/40
+10000/10000 [==============================] - 36s 4ms/step - loss: 2.7819
+Epoch 6/40
+10000/10000 [==============================] - 40s 4ms/step - loss: 2.7112
+Epoch 7/40
+10000/10000 [==============================] - 35s 4ms/step - loss: 2.6427
+Epoch 8/40
+10000/10000 [==============================] - 36s 4ms/step - loss: 2.5771
+Epoch 9/40
+10000/10000 [==============================] - 40s 4ms/step - loss: 2.5177
+Epoch 10/40
+10000/10000 [==============================] - 47s 5ms/step - loss: 2.4701
+Epoch 11/40
+10000/10000 [==============================] - 49s 5ms/step - loss: 2.4259
+Epoch 12/40
+10000/10000 [==============================] - 53s 5ms/step - loss: 2.3843
+Epoch 13/40
+10000/10000 [==============================] - 44s 4ms/step - loss: 2.3514
+Epoch 14/40
+10000/10000 [==============================] - 47s 5ms/step - loss: 2.3289
+Epoch 15/40
+10000/10000 [==============================] - 37s 4ms/step - loss: 2.2966
+Epoch 16/40
+10000/10000 [==============================] - 39s 4ms/step - loss: 2.2736
+Epoch 17/40
+10000/10000 [==============================] - 35s 4ms/step - loss: 2.2510
+Epoch 18/40
+10000/10000 [==============================] - 51s 5ms/step - loss: 2.2270
+Epoch 19/40
+10000/10000 [==============================] - 43s 4ms/step - loss: 2.2078
+Epoch 20/40
+10000/10000 [==============================] - 52s 5ms/step - loss: 2.1864
+Epoch 21/40
+10000/10000 [==============================] - 50s 5ms/step - loss: 2.1676
+Epoch 22/40
+10000/10000 [==============================] - 35s 3ms/step - loss: 2.1471
+Epoch 23/40
+10000/10000 [==============================] - 47s 5ms/step - loss: 2.1340
+Epoch 24/40
+10000/10000 [==============================] - 51s 5ms/step - loss: 2.1114
+Epoch 25/40
+10000/10000 [==============================] - 51s 5ms/step - loss: 2.0905
+Epoch 26/40
+10000/10000 [==============================] - 47s 5ms/step - loss: 2.0704
+Epoch 27/40
+10000/10000 [==============================] - 44s 4ms/step - loss: 2.0545
+Epoch 28/40
+10000/10000 [==============================] - 45s 5ms/step - loss: 2.0340
+Epoch 29/40
+10000/10000 [==============================] - 34s 3ms/step - loss: 2.0137
+Epoch 30/40
+10000/10000 [==============================] - 35s 3ms/step - loss: 1.9966
+Epoch 31/40
+10000/10000 [==============================] - 33s 3ms/step - loss: 1.9763
+Epoch 32/40
+10000/10000 [==============================] - 33s 3ms/step - loss: 1.9561
+Epoch 33/40
+10000/10000 [==============================] - 32s 3ms/step - loss: 1.9296
+Epoch 34/40
+10000/10000 [==============================] - 37s 4ms/step - loss: 1.9132
+Epoch 35/40
+10000/10000 [==============================] - 32s 3ms/step - loss: 1.8911
+Epoch 36/40
+10000/10000 [==============================] - 32s 3ms/step - loss: 1.8683
+Epoch 37/40
+10000/10000 [==============================] - 28s 3ms/step - loss: 1.8415
+Epoch 38/40
+10000/10000 [==============================] - 31s 3ms/step - loss: 1.8296
+Epoch 39/40
+10000/10000 [==============================] - 29s 3ms/step - loss: 1.7983
+Epoch 40/40
+10000/10000 [==============================] - 34s 3ms/step - loss: 1.7712
+
+    \end{Verbatim}
+
+    How do we make a given number of predictions (characters) based on this
+fitted model?
+
+First we predict the next character after following any chunk of
+characters in the text of length equal to our chosen window size. Then
+we remove the first character in our input sequence and tack our
+prediction onto the end. This gives us a slightly changed sequence of
+inputs that still has length equal to the size of our window. We then
+feed in this updated input sequence into the model to predict the
+another character. Together then we have two predicted characters
+following our original input sequence. Repeating this process N times
+gives us N predicted characters.
+
+In the next Python cell we provide you with a completed function that
+does just this - it makes predictions when given a) a trained RNN model,
+b) a subset of (window\_size) characters from the text, and c) a number
+of characters to predict (to follow our input subset).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} function that uses trained model to predict a desired number of future characters}
+         \PY{k}{def} \PY{n+nf}{predict\PYZus{}next\PYZus{}chars}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{input\PYZus{}chars}\PY{p}{,}\PY{n}{num\PYZus{}to\PYZus{}predict}\PY{p}{)}\PY{p}{:}     
+             \PY{c+c1}{\PYZsh{} create output}
+             \PY{n}{predicted\PYZus{}chars} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}to\PYZus{}predict}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} convert this round\PYZsq{}s predicted characters to numerical input    }
+                 \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{window\PYZus{}size}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{input\PYZus{}chars}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{chars\PYZus{}to\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.}
+         
+                 \PY{c+c1}{\PYZsh{} make this round\PYZsq{}s prediction}
+                 \PY{n}{test\PYZus{}predict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} translate numerical prediction back to characters}
+                 \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{test\PYZus{}predict}\PY{p}{)}                           \PY{c+c1}{\PYZsh{} predict class of each test input}
+                 \PY{n}{d} \PY{o}{=} \PY{n}{indices\PYZus{}to\PYZus{}chars}\PY{p}{[}\PY{n}{r}\PY{p}{]} 
+         
+                 \PY{c+c1}{\PYZsh{} update predicted\PYZus{}chars and input}
+                 \PY{n}{predicted\PYZus{}chars}\PY{o}{+}\PY{o}{=}\PY{n}{d}
+                 \PY{n}{input\PYZus{}chars}\PY{o}{+}\PY{o}{=}\PY{n}{d}
+                 \PY{n}{input\PYZus{}chars} \PY{o}{=} \PY{n}{input\PYZus{}chars}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+             \PY{k}{return} \PY{n}{predicted\PYZus{}chars}
+\end{Verbatim}
+
+
+    With your trained model try a few subsets of the complete text as input
+- note the length of each must be exactly equal to the window size. For
+each subset use the function above to predict the next 100 characters
+that follow each input.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} TODO: choose an input sequence and use the prediction function in the previous Python cell to predict 100 characters following it}
+         \PY{c+c1}{\PYZsh{} get an appropriately sized chunk of characters from the text}
+         \PY{n}{start\PYZus{}inds} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} load in weights}
+         \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}weights/best\PYZus{}RNN\PYZus{}small\PYZus{}textdata\PYZus{}weights.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{start\PYZus{}inds}\PY{p}{:}
+             \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{s}
+             \PY{n}{input\PYZus{}chars} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{window\PYZus{}size}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} use the prediction function}
+             \PY{n}{predict\PYZus{}input} \PY{o}{=} \PY{n}{predict\PYZus{}next\PYZus{}chars}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{input\PYZus{}chars}\PY{p}{,}\PY{n}{num\PYZus{}to\PYZus{}predict} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} print out input characters}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{input\PYZus{}line} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input chars = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}  \PY{n}{input\PYZus{}chars} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{input\PYZus{}line}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} print out predicted characters}
+             \PY{n}{line} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted chars = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}  \PY{n}{predict\PYZus{}input} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+------------------
+input chars = 
+she eclipses and predominates the whole of her sex. it was not that he felt any emotion akin to love"
+
+predicted chars = 
+r whis she ware sourd of the sigen the sere was cound and he was the wark the was of the was of the "
+
+------------------
+input chars = 
+in to love for irene adler. all emotions, and that one particularly, were abhorrent to his cold, pre"
+
+predicted chars = 
+cessed in the sell sourd soud ho mas wont the sound has cound the seen whith a dour the hes wound he"
+
+------------------
+input chars = 
+dler, of dubious and questionable memory. i had seen little of holmes lately. my marriage had drifte"
+
+predicted chars = 
+d hes are sourd so for sever. it in whard mere whor hes of mere whith he was cere the sees of the wa"
+
+------------------
+input chars = 
+ you had a particularly malignant boot slitting specimen of the london slavey. as to your practice, "
+
+predicted chars = 
+in the was tour the sore sound ho mas of the was ous the seed he was dound and he was the wark the w"
+
+
+    \end{Verbatim}
+
+    This looks ok, but not great. Now lets try the same experiment with a
+larger chunk of the data - with the first 100,000 input/output pairs.
+
+Tuning RNNs for a typical character dataset like the one we will use
+here is a computationally intensive endeavour and thus timely on a
+typical CPU. Using a reasonably sized cloud-based GPU can speed up
+training by a factor of 10. Also because of the long training time it is
+highly recommended that you carefully write the output of each step of
+your process to file. This is so that all of your results are saved even
+if you close the web browser you're working out of, as the processes
+will continue processing in the background but variables/output in the
+notebook system will not update when you open it again.
+
+In the next cell we show you how to create a text file in Python and
+record data to it. This sort of setup can be used to record your final
+predictions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} A simple way to write output to file}
+         \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZus{}test\PYZus{}output.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}              \PY{c+c1}{\PYZsh{} create an output file to write too}
+         \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{this is only a test }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}           \PY{c+c1}{\PYZsh{} print some output text}
+         \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the value of x is }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    \PY{c+c1}{\PYZsh{} record a variable value}
+         \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}     
+         
+         \PY{c+c1}{\PYZsh{} print out the contents of my\PYZus{}test\PYZus{}output.txt}
+         \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZus{}test\PYZus{}output.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}              \PY{c+c1}{\PYZsh{} create an output file to write too}
+         \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} 'this is only a test \textbackslash{}nthe value of x is 2\textbackslash{}n'
+\end{Verbatim}
+            
+    With this recording devices we can now more safely perform experiments
+on larger portions of the text. In the next cell we will use the first
+100,000 input/output pairs to train our RNN model.
+
+    First we fit our model to the dataset, then generate text using the
+trained model in precisely the same generation method applied before on
+the small dataset.
+
+\textbf{Note:} your generated words should be - by and large - more
+realistic than with the small dataset, but you won't be able to generate
+perfect English sentences even with this amount of data. A rule of
+thumb: your model is working well if you generate sentences that largely
+contain real English words.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} a small subset of our input/output pairs}
+         \PY{n}{Xlarge} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100000}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{ylarge} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100000}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} TODO: fit to our larger dataset}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xlarge}\PY{p}{,} \PY{n}{ylarge}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} save weights}
+         \PY{n}{model}\PY{o}{.}\PY{n}{save\PYZus{}weights}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}weights/best\PYZus{}RNN\PYZus{}large\PYZus{}textdata\PYZus{}weights.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/30
+100000/100000 [==============================] - 368s 4ms/step - loss: 2.0441
+Epoch 2/30
+ 99500/100000 [============================>.] - ETA: 2s - loss: 1.9459
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------
+
+        KeyboardInterrupt                   Traceback (most recent call last)
+
+        <ipython-input-33-4069e5c31d24> in <module>()
+          4 
+          5 \# TODO: fit to our larger dataset
+    ----> 6 model.fit(Xlarge, ylarge, batch\_size=500, epochs=30, verbose=1)
+          7 
+          8 \# save weights
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}models.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+        958                               initial\_epoch=initial\_epoch,
+        959                               steps\_per\_epoch=steps\_per\_epoch,
+    --> 960                               validation\_steps=validation\_steps)
+        961 
+        962     def evaluate(self, x, y, batch\_size=32, verbose=1,
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}training.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+       1648                               initial\_epoch=initial\_epoch,
+       1649                               steps\_per\_epoch=steps\_per\_epoch,
+    -> 1650                               validation\_steps=validation\_steps)
+       1651 
+       1652     def evaluate(self, x=None, y=None,
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}training.py in \_fit\_loop(self, f, ins, out\_labels, batch\_size, epochs, verbose, callbacks, val\_f, val\_ins, shuffle, callback\_metrics, initial\_epoch, steps\_per\_epoch, validation\_steps)
+       1211                     batch\_logs['size'] = len(batch\_ids)
+       1212                     callbacks.on\_batch\_begin(batch\_index, batch\_logs)
+    -> 1213                     outs = f(ins\_batch)
+       1214                     if not isinstance(outs, list):
+       1215                         outs = [outs]
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}backend\textbackslash{}tensorflow\_backend.py in \_\_call\_\_(self, inputs)
+       2350         session = get\_session()
+       2351         updated = session.run(fetches=fetches, feed\_dict=feed\_dict,
+    -> 2352                               **self.session\_kwargs)
+       2353         return updated[:len(self.outputs)]
+       2354 
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in run(self, fetches, feed\_dict, options, run\_metadata)
+        887     try:
+        888       result = self.\_run(None, fetches, feed\_dict, options\_ptr,
+    --> 889                          run\_metadata\_ptr)
+        890       if run\_metadata:
+        891         proto\_data = tf\_session.TF\_GetBuffer(run\_metadata\_ptr)
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_run(self, handle, fetches, feed\_dict, options, run\_metadata)
+       1118     if final\_fetches or final\_targets or (handle and feed\_dict\_tensor):
+       1119       results = self.\_do\_run(handle, final\_targets, final\_fetches,
+    -> 1120                              feed\_dict\_tensor, options, run\_metadata)
+       1121     else:
+       1122       results = []
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_do\_run(self, handle, target\_list, fetch\_list, feed\_dict, options, run\_metadata)
+       1315     if handle is None:
+       1316       return self.\_do\_call(\_run\_fn, self.\_session, feeds, fetches, targets,
+    -> 1317                            options, run\_metadata)
+       1318     else:
+       1319       return self.\_do\_call(\_prun\_fn, self.\_session, handle, feeds, fetches)
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_do\_call(self, fn, *args)
+       1321   def \_do\_call(self, fn, *args):
+       1322     try:
+    -> 1323       return fn(*args)
+       1324     except errors.OpError as e:
+       1325       message = compat.as\_text(e.message)
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda2\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}client\textbackslash{}session.py in \_run\_fn(session, feed\_dict, fetch\_list, target\_list, options, run\_metadata)
+       1300           return tf\_session.TF\_Run(session, options,
+       1301                                    feed\_dict, fetch\_list, target\_list,
+    -> 1302                                    status, run\_metadata)
+       1303 
+       1304     def \_prun\_fn(session, handle, feed\_dict, fetch\_list):
+    
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} TODO: choose an input sequence and use the prediction function in the previous Python cell to predict 100 characters following it}
+        \PY{c+c1}{\PYZsh{} get an appropriately sized chunk of characters from the text}
+        \PY{n}{start\PYZus{}inds} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} save output}
+        \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}gen\PYZus{}output/RNN\PYZus{}large\PYZus{}textdata\PYZus{}output.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} create an output file to write too}
+        
+        \PY{c+c1}{\PYZsh{} load weights}
+        \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}weights/best\PYZus{}RNN\PYZus{}large\PYZus{}textdata\PYZus{}weights.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{start\PYZus{}inds}\PY{p}{:}
+            \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{s}
+            \PY{n}{input\PYZus{}chars} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{window\PYZus{}size}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} use the prediction function}
+            \PY{n}{predict\PYZus{}input} \PY{o}{=} \PY{n}{predict\PYZus{}next\PYZus{}chars}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{input\PYZus{}chars}\PY{p}{,}\PY{n}{num\PYZus{}to\PYZus{}predict} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} print out input characters}
+            \PY{n}{line} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+            \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+        
+            \PY{n}{input\PYZus{}line} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input chars = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}  \PY{n}{input\PYZus{}chars} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{input\PYZus{}line}\PY{p}{)}
+            \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{input\PYZus{}line}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} print out predicted characters}
+            \PY{n}{predict\PYZus{}line} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted chars = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}  \PY{n}{predict\PYZus{}input} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{predict\PYZus{}line}\PY{p}{)}
+            \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{predict\PYZus{}line}\PY{p}{)}
+        \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

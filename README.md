@@ -12,3 +12,4 @@
 ## Projects and Labs
 
 * Project 5. [CNN: Dog Breed Classifier](2_deep_learning/1_dog_breed_classifier/)
+* Project 6.  [RNN: Apple Stock & Sherlock Holmes](2_deep_learning/2_rnn_stock_sherlock/)

@@ -1,0 +1,20 @@
+-------------------
+input chars = 
+she eclipses and predominates the whole of her sex. it was not that he felt any emotion akin to love"
+predicted chars = 
+ of and a street of a sheet of a street.  we have had an accomplicat of and the cast that he had dro"
+-------------------
+input chars = 
+in to love for irene adler. all emotions, and that one particularly, were abhorrent to his cold, pre"
+predicted chars = 
+cess on the street.  we have had and a sobuter of who marriess and serpocton lyess.  well, the shadd"
+-------------------
+input chars = 
+dler, of dubious and questionable memory. i had seen little of holmes lately. my marriage had drifte"
+predicted chars = 
+d my from ineressed to my from in my ouss and assingant his face. i have been to at the case of the "
+-------------------
+input chars = 
+ you had a particularly malignant boot slitting specimen of the london slavey. as to your practice, "
+predicted chars = 
+and then to the laighis abserve that the drow had between that the close, and the case of the stane "
